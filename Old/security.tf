@@ -1,12 +1,9 @@
-# --- SECURITY GROUPS (VIRTUAL FIREWALLS) ---
-
-# Public Security Group for the Web Server
 resource "aws_security_group" "allow_web" {
   name        = "allow_web_traffic"
   description = "Inbound HTTP and all outbound"
   vpc_id      = aws_vpc.main.id
 
-  # Inbound HTTP rule: Allow incoming website traffic on Port 80 from anywhere
+  # Inbound HTTP rule
   ingress {
     from_port   = 80
     to_port     = 80
@@ -14,7 +11,7 @@ resource "aws_security_group" "allow_web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Outbound "allow everything" rule (Crucial so the EC2 can talk out to the AI API)
+  # Outbound "allow everything" rule
   egress {
     from_port   = 0
     to_port     = 0
